@@ -1,4 +1,6 @@
-Instructions
+Instructions for deployng Nginx container using Kubernetes.
+
+1. Create 1 new user.
 
 sudo useradd -m -s /bin/bash admin
 sudo passwd admin
@@ -6,6 +8,7 @@ sudo usermod -aG wheel admin
 su - admin
 sudo whoami
 
+2, Install Docker
 
 DOCKER
 dnf update -y
@@ -15,7 +18,8 @@ systemctl enable --now docker
 sudo usermod -aG docker $USER && newgrp docker
 
 
-Kubernetes
+3. Install Kubernetes, create pod, deploy the container.
+
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-linux-amd64
@@ -36,6 +40,7 @@ kubectl exec -it nginx-depl-68c944fcbc-n88sb -- bin/bash
 
 #-- bin/bash → Runs /bin/bash inside the pod.
 
+4. YAML Deployment
 nano nginx-deployment.yaml
 
 apiVersion: apps/v1
